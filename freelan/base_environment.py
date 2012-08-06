@@ -56,9 +56,17 @@ class BaseEnvironment(SConsEnvironment):
 
         if not 'CXXFLAGS' in self:
             self['CXXFLAGS'] = []
+            # begin openwrt, ugly hardcoded patch due to the fact exported linux env variableS  cannot be converted into python arrays
+            # => FREELAN_ENV_CXXFLAGS="-I/home/log/openwrt/trunk/staging_dir/target-mips_r2_uClibc-0.9.33.2/usr/include -I/home/log/openwrt/freelan/freelan-all/libcryptoplus/include ..."
+            self['CXXFLAGS'] = ["-I/home/log/openwrt/trunk/staging_dir/target-mips_r2_eglibc-2.13/usr/include","-I/home/log/openwrt/freelan/freelan-all/libcryptoplus/include","-I/home/log/openwrt/trunk/build_dir/target-mips_r2_eglibc-2.13/libiconv/include","-I/home/log/openwrt/freelan/freelan-all/libfscp/include","-I/home/log/openwrt/freelan/freelan-all/libasiotap/include","-I/home/log/openwrt/freelan/freelan-all/libfreelan/include"]
+            # end openwrt
 
         if not 'LINKFLAGS' in self:
             self['LINKFLAGS'] = []
+            
+            # begin openwrt, same ugly patch for linked libs
+            self['LINKFLAGS'] = ["-L/home/log/openwrt/trunk/staging_dir/target-mips_r2_eglibc-2.13/usr/lib","-L/home/log/openwrt/freelan/freelan-all/libcryptoplus/lib","-L/home/log/openwrt/trunk/build_dir/target-mips_r2_eglibc-2.13/libiconv","-L/home/log/openwrt/freelan/freelan-all/libfscp/lib","-L/home/log/openwrt/freelan/freelan-all/libasiotap/lib","-L/home/log/openwrt/freelan/freelan-all/libfreelan/lib"]
+            # end openwrt            
 
         if not 'SHLINKFLAGS' in self:
             self['SHLINKFLAGS'] = []
