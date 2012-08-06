@@ -36,8 +36,9 @@ class PosixEnvironment(BaseEnvironment):
         self['CXXFLAGS'].append('-Wall')
         self['CXXFLAGS'].append('-Wextra')
         self['CXXFLAGS'].append('-Werror')
-        self['CXXFLAGS'].append('-pedantic')
-        self['CXXFLAGS'].append('-Wshadow')
+        #too restrictive for openWrt gcc toolchain
+        #self['CXXFLAGS'].append('-pedantic')
+        #self['CXXFLAGS'].append('-Wshadow')
         self['CXXFLAGS'].append('-Wno-long-long')
         self['CXXFLAGS'].append('-Wno-uninitialized')
         self['CXXFLAGS'].append('-Wno-strict-aliasing')
